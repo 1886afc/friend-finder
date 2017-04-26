@@ -24,13 +24,8 @@ module.exports = function(app) {
 		var bestMatch = {
 			name: "",
 			photo: "",
-			friendDiff: 1000
+			friendDiff: 100
 		};
-
-		// users survey results
-		var userName = newFriend.name;
-		var photo = newFriend.photo;
-		var score = newFriend.scores;
 
 		// calculating the diff of users scores and those in the database
 		var totalDiff = 0;
@@ -39,19 +34,19 @@ module.exports = function(app) {
 		for (var i = 0; i < friendsData.length; i++) {
 			// console.log(friendsData[i].name);
 			// console.log(friendsData[i].photo);
-			totalDiff = 0;
+			
 
 			//looping through all the scores
 			for (var j = 0; j < friendsData[i].scores[j]; j++) {
 				//calculating totalDiff between scores
 				totalDiff += Math.abs(
-					parseInt(score[j])-
+					parseInt(newFriend.scores)-
 					parseInt(friendsData[i].scores[j]));
 
 				if (totalDiff <= bestMatch.friendDiff) {
 
-					bestMatch.name = friendsData[i].name;
-					bestMatch.photo = friendsData[i].photo;
+					bestMatch.name = friendsData.name;
+					bestMatch.photo = friendsData.photo;
 					bestMatch.friendDiff = totalDiff;
 					console.log("best match   " + JSON.stringify(bestMatch));
 				}
@@ -64,4 +59,5 @@ module.exports = function(app) {
 		//returns json of best match to be used for html
 		res.json(bestMatch);
 	});
+
 };
