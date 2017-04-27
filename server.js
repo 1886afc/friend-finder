@@ -8,7 +8,7 @@ var bodyParser = require("body-parser");
 var app = express();
 
 // setting port we will be listening on
-var port = process.env.PORT || 9000;
+var port = process.env.PORT || 3000;
 
 // bodyParser allows for our server to interpret data sent to it.
 app.use(bodyParser.json());
